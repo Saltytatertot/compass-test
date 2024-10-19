@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3w0cwkpbel8x"]
+
+[ext_resource type="Script" path="res://compass.gd" id="1_yy0lh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c0isl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hk7n1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8ugn1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uy31i"]
+albedo_color = Color(0.392157, 0.247059, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_sgkit"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddbxo"]
+
+[node name="Compass" type="Node3D"]
+script = ExtResource("1_yy0lh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.04908, -0.04871, 0.201619, 0.399808, 0.127813, -0.529041, 0, 0.0789702, 0.980614, -0.147936, 1.98689, 0)
+mesh = SubResource("BoxMesh_c0isl")
+surface_material_override/0 = SubResource("StandardMaterial3D_hk7n1")
+
+[node name="CompassMesh" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.798867, 6.10333e-07, -0.0425587, -6.08407e-07, 0.8, 5.24079e-08, 0.0425587, -1.99675e-08, 0.798867, -0.0213853, 0.0788622, 0.0251009)
+mesh = SubResource("CylinderMesh_8ugn1")
+skeleton = NodePath("../../../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uy31i")
+
+[node name="Needle" type="MeshInstance3D" parent="MeshInstance3D/CompassMesh"]
+transform = Transform3D(0.204247, 0.0395852, 0.0158916, -0.00964727, -0.0108474, 0.326091, 0.0167696, -0.488373, -0.00595468, 0.0193349, 0.906517, -0.301801)
+mesh = SubResource("PrismMesh_sgkit")
+skeleton = NodePath("../../../../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ddbxo")

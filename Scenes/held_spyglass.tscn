@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn4ioghqobbuj"]
+
+[ext_resource type="PackedScene" uid="uid://7i4ml2nvilyv" path="res://3d Assets/Items/Spygalss_1.fbx" id="1_kij5b"]
+[ext_resource type="PackedScene" uid="uid://cxj1jgb7f6cde" path="res://3d Assets/Items/Spygalss_2.fbx" id="2_l8omt"]
+
+[node name="Spyglass" type="Node3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="Spygalss_1" parent="." instance=ExtResource("1_kij5b")]
+transform = Transform3D(-0.520658, -0.147259, -0.84097, 0.830899, 0.139045, -0.538771, 0.196271, -0.979276, 0.0499628, 0, 0, 0)
+visible = false
+
+[node name="Spygalss_2" parent="." instance=ExtResource("2_l8omt")]
+transform = Transform3D(-0.520658, -0.147259, -0.84097, 0.830899, 0.139045, -0.538771, 0.196271, -0.979276, 0.0499628, 0, 0, 0)

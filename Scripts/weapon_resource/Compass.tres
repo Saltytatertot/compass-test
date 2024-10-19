@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://b4rm685jjm4rc"]
+
+[ext_resource type="Script" path="res://Scripts/weapon_resource.gd" id="1_3dxsd"]
+
+[resource]
+script = ExtResource("1_3dxsd")
+Weapon_Name = "Compass"
+Current_Ammo = null
+Reserve_Ammo = null
+Magazine_Size = null
+Max_Ammo_Reserve = null

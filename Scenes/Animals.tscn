@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://ciys07a1ugv3r"]
+
+[ext_resource type="PackedScene" uid="uid://bo4nnvhuuegwi" path="res://3d Assets/Animals/Cow.fbx" id="1_bnsy6"]
+[ext_resource type="PackedScene" uid="uid://bhb4247ykx0wa" path="res://3d Assets/Animals/Fish.fbx" id="2_vllsg"]
+[ext_resource type="PackedScene" uid="uid://daoe01khklsu5" path="res://3d Assets/Animals/Horse.fbx" id="3_5v4or"]
+[ext_resource type="PackedScene" uid="uid://byvck6cosamgl" path="res://3d Assets/Animals/Parrot.fbx" id="4_mbnec"]
+[ext_resource type="PackedScene" uid="uid://bxp52fps288nl" path="res://3d Assets/Animals/Pig.fbx" id="5_fgnj2"]
+[ext_resource type="PackedScene" uid="uid://djsi1agnyxogp" path="res://3d Assets/Animals/Shark.fbx" id="6_2yln3"]
+[ext_resource type="PackedScene" uid="uid://cd4mh6y2cmejh" path="res://3d Assets/Animals/Turtle.fbx" id="7_0h536"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Cow" parent="." instance=ExtResource("1_bnsy6")]
+
+[node name="Fish" parent="." instance=ExtResource("2_vllsg")]
+
+[node name="Horse" parent="." instance=ExtResource("3_5v4or")]
+
+[node name="Parrot" parent="." instance=ExtResource("4_mbnec")]
+
+[node name="Pig" parent="." instance=ExtResource("5_fgnj2")]
+
+[node name="Shark" parent="." instance=ExtResource("6_2yln3")]
+
+[node name="Turtle" parent="." instance=ExtResource("7_0h536")]

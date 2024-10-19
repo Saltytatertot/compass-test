@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://5rsqxwufek40"]
+
+[ext_resource type="Script" path="res://target.gd" id="1_cqpih"]
+[ext_resource type="Script" path="res://target_orbit_point.gd" id="2_yd1sf"]
+[ext_resource type="PackedScene" uid="uid://2r6pffa81spa" path="res://Player/player.tscn" id="3_6ip8b"]
+[ext_resource type="PackedScene" uid="uid://dihg5qrv66f55" path="res://Pickups/pickup_compass.tscn" id="5_l1131"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vpj7s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_hfv80"]
+sky_material = SubResource("ProceduralSkyMaterial_vpj7s")
+
+[sub_resource type="Environment" id="Environment_fn025"]
+background_mode = 2
+sky = SubResource("Sky_hfv80")
+tonemap_mode = 2
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1v6qn"]
+albedo_color = Color(0.318656, 0.171263, 0.025343, 1)
+emission = Color(0.0973924, 0.0973924, 0.0973924, 1)
+emission_energy_multiplier = 1.4
+clearcoat_enabled = true
+clearcoat = 0.5
+anisotropy_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_lfnuv"]
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hym4g"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ny288"]
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbemr"]
+albedo_color = Color(0.00501607, 0.00501607, 0.00501607, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fn025")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(298.961, 0, 0, 0, 0.158, 0, 0, 0, 330, 0, -0.167397, 0)
+material_override = SubResource("ORMMaterial3D_1v6qn")
+use_collision = true
+
+[node name="Target" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.225)
+top_level = true
+mesh = SubResource("SphereMesh_lfnuv")
+skeleton = NodePath("../Player")
+surface_material_override/0 = SubResource("StandardMaterial3D_hym4g")
+script = ExtResource("1_cqpih")
+
+[node name="TargetOrbitPoint" type="Node3D" parent="Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_yd1sf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Target/TargetOrbitPoint"]
+visible = false
+mesh = SubResource("SphereMesh_ny288")
+surface_material_override/0 = SubResource("StandardMaterial3D_sbemr")
+
+[node name="Player" parent="." instance=ExtResource("3_6ip8b")]
+
+[node name="PickupCompass" parent="." instance=ExtResource("5_l1131")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.390068, 0.915939, -2.71331)

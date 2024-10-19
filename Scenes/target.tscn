@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://jggaaytyi0s4"]
+
+[ext_resource type="Script" path="res://Scripts/target.gd" id="1_rlwmy"]
+[ext_resource type="Script" path="res://Scripts/target_orbit_point.gd" id="2_ipqsx"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wbx2g"]
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_204tc"]
+albedo_color = Color(0.748072, 0.616824, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1kl6"]
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7jmx"]
+albedo_color = Color(0.00501607, 0.00501607, 0.00501607, 1)
+
+[node name="Target" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.225)
+top_level = true
+mesh = SubResource("SphereMesh_wbx2g")
+surface_material_override/0 = SubResource("StandardMaterial3D_204tc")
+script = ExtResource("1_rlwmy")
+
+[node name="TargetOrbitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_ipqsx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetOrbitPoint"]
+visible = false
+mesh = SubResource("SphereMesh_v1kl6")
+surface_material_override/0 = SubResource("StandardMaterial3D_r7jmx")

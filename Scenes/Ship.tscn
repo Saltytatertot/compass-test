@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb1uxahbpsd1l"]
+
+[ext_resource type="PackedScene" uid="uid://bn3ds4vm13trd" path="res://3d Assets/Ships/Ships Small/LowPolyShip.fbx" id="1_6yjlp"]
+[ext_resource type="PackedScene" uid="uid://cmcosung05wra" path="res://3d Assets/Characters/Pirates/Pirate_2.fbx" id="2_lpih8"]
+[ext_resource type="PackedScene" uid="uid://bkdie4du3ks0o" path="res://3d Assets/Characters/Pirates/Pirate_4.fbx" id="3_sibil"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w7v30"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wvlrl"]
+sky_material = SubResource("ProceduralSkyMaterial_w7v30")
+
+[sub_resource type="Environment" id="Environment_mpeft"]
+background_mode = 2
+sky = SubResource("Sky_wvlrl")
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[node name="Ship" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62557, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mpeft")
+
+[node name="LowPolyShip" parent="." instance=ExtResource("1_6yjlp")]
+
+[node name="Pirate_2" parent="." instance=ExtResource("2_lpih8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647393, 1.01495, -4.31737)
+
+[node name="Pirate_4" parent="." instance=ExtResource("3_sibil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15047, 0.00854433, -0.487678)
+
+[editable path="LowPolyShip"]

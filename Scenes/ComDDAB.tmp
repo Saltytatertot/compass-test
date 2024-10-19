@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://5rsqxwufek40"]
+
+[ext_resource type="PackedScene" uid="uid://2r6pffa81spa" path="res://Player/player.tscn" id="1_7r7n8"]
+[ext_resource type="PackedScene" uid="uid://jggaaytyi0s4" path="res://Scenes/target.tscn" id="2_i6oeu"]
+[ext_resource type="PackedScene" uid="uid://dihg5qrv66f55" path="res://Pickups/pickup_compass.tscn" id="3_1xpsb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vpj7s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_hfv80"]
+sky_material = SubResource("ProceduralSkyMaterial_vpj7s")
+
+[sub_resource type="Environment" id="Environment_fn025"]
+background_mode = 2
+sky = SubResource("Sky_hfv80")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1v6qn"]
+albedo_color = Color(4.04298e-06, 0.976332, 0.977011, 1)
+emission = Color(0.0973924, 0.0973924, 0.0973924, 1)
+emission_energy_multiplier = 1.4
+clearcoat_enabled = true
+clearcoat = 0.5
+anisotropy_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fn025")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+sky_mode = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(298.961, 0, 0, 0, 0.158, 0, 0, 0, 330, 0, -0.167397, 0)
+material_override = SubResource("ORMMaterial3D_1v6qn")
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+
+[node name="Player" parent="." instance=ExtResource("1_7r7n8")]
+
+[node name="Target" parent="." instance=ExtResource("2_i6oeu")]
+visible = false
+
+[node name="PickupCompass" parent="." instance=ExtResource("3_1xpsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55353, 0.915939, -2.14702)
+
+[node name="PickupCompass2" parent="." instance=ExtResource("3_1xpsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1643, 0.915939, -2.14702)

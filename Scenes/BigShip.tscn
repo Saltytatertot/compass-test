@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://duillfwqrvyum"]
+
+[ext_resource type="PackedScene" uid="uid://b41schjydvtq6" path="res://3d Assets/Ships/Ships Large/BigShip.fbx" id="1_3ic38"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5dnr1"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_a7uti"]
+sky_material = SubResource("ProceduralSkyMaterial_5dnr1")
+
+[sub_resource type="Environment" id="Environment_pj54o"]
+background_mode = 2
+sky = SubResource("Sky_a7uti")
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pj54o")
+
+[node name="BigShip" parent="." instance=ExtResource("1_3ic38")]
+
+[editable path="BigShip"]
