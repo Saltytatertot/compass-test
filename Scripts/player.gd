@@ -126,7 +126,8 @@ func _physics_process(delta: float) -> void:
 #		DONE: Compass needle now has some fuzz to it.
 		#TODO: Make compass wobble a little bit via animation player
 # TODO: Add in pistol weapon
-# TODO: Add in telescope
+# DONE: Add in telescope
+# TODO: Make Spyglass function like a telescope
 # DONE: Import Ship
 # DONE: Impport Ship's Textures
 # TODO: Make Ship into a vehicle

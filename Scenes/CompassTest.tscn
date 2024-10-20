@@ -52,8 +52,5 @@ visible = false
 [node name="PickupCompass" parent="." instance=ExtResource("3_1xpsb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55353, 0.915939, -2.14702)
 
-[node name="PickupCompass2" parent="." instance=ExtResource("3_1xpsb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1643, 0.915939, -2.14702)
-
 [node name="PickupSpyglass" parent="." instance=ExtResource("4_tnoie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3087, 0.745149, -1.93086)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07603, 0.745149, -1.93086)
