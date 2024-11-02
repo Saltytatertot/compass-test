@@ -130,10 +130,13 @@ func _physics_process(delta: float) -> void:
 # TODO: Make Spyglass function like a telescope
 # DONE: Import Ship
 # DONE: Impport Ship's Textures
-# TODO: Make Ship into a vehicle
+# DONE: Make Ship into a Floating Body
 # TODO: Make Ship Traversible
-# TODO: Make Ship Sailable
-# TODO: Get water working
+# TODO: Make Ship Sailable / Moveable
+# DONE: Get water working
 # TODO: Get waves shader working
 # TODO: Make Islands as obstacles
 # TODO: Make Procedural Targets to Sail to.
+# TODO: Add in dogs for passengers to sail
+# TODO: Make compass work like a north facing compass.
+# TODO: 
