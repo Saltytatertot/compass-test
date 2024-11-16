@@ -4,7 +4,9 @@ extends RigidBody3D
 @onready var verti: Node3D = $Hori/Verti
 
 var mouse_movement = Vector2()
-var current_velocity : Vector3 = (linear_velocity * transform.basis)
+var current_velocity : Vector3 = (linear_velocity * transform.basis.transposed())
+var moving_rotational_degrees = 0.5
+var stationary_rotational_degrees = 0.4
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -33,27 +35,39 @@ func _physics_process(delta: float) -> void:
 	
 	if mouse_movement != Vector2():
 		hori.rotation_degrees.y -= mouse_movement.x
-		verti.rotation_degrees.x -= mouse_movement.y
-		if verti.rotation_degrees.x <= -90:
-			verti.rotation_degrees.x = -90
+		verti.rotation_degrees.x += mouse_movement.y
+		if verti.rotation_degrees.x <= -40:
+			verti.rotation_degrees.x = -40
 		if verti.rotation_degrees.x >= 0:
 			verti.rotation_degrees.x = 0
 		mouse_movement = Vector2()
 
 	#var input_dir := Input.get_vector("Left", "Right", "Forward", "Backward")
 			#
+#	Movement is propulsion based, right now it puts the force from the direction of the vector.
+#	HACK Apply torque doesn't seem to be working, rotational_degrees will work for now. 
 	if Input.is_action_pressed( "Forward" ):
-		add_constant_central_force( current_velocity )
-		if Input.is_action_pressed( "Right" ):
-			add_constant_torque( Vector3( 0,5,0 ) )
-		if Input.is_action_pressed( "Left" ):
-			add_constant_torque( Vector3( 0,-5,0 ) )
+		apply_force( global_transform.basis * Vector3.BACK * 15)
+		#if Input.is_action_pressed( "Right" ):
+			#rotation_degrees.y -= stationary_rotational_degrees
+			#
+			##apply_torque_impulse( Vector3( 0,5,0 ) * delta ) 
+		#if Input.is_action_pressed( "Left" ):
+			#rotation_degrees.y += stationary_rotational_degrees
+			##apply_torque( Vector3( 0,-5,0 ) * 50 )
 	elif Input.is_action_pressed( "Backward" ):
-		add_constant_central_force( -current_velocity )
-		if Input.is_action_pressed( "Right" ):
-			add_constant_torque( Vector3( 0,5,0 ) )
-		if Input.is_action_pressed( "Left" ):
-			add_constant_torque( Vector3( 0,-5,0 ) )
+		apply_force( global_transform.basis * Vector3.FORWARD * 10)
+		#if Input.is_action_pressed( "Right" ):
+			#rotation_degrees.y -= stationary_rotational_degrees
+			##apply_torque( Vector3( 0,5,0 ) * 50)
+		#if Input.is_action_pressed( "Left" ):
+			#rotation_degrees.y += stationary_rotational_degrees
+	
+	if Input.is_action_pressed( "Right" ):
+		rotation_degrees.y -= stationary_rotational_degrees
+	if Input.is_action_pressed( "Left" ):
+		rotation_degrees.y += stationary_rotational_degrees
+			#apply_torque( Vector3( 0,-5,0 ) )
 
 	floaty_physics(floaties)
 	
