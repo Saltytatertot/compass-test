@@ -11,9 +11,10 @@ points = PackedVector3Array(0.018792, 0.00852118, 0.0576805, -0.0147286, 0.02527
 [node name="Ship" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62557, 0)
 input_ray_pickable = false
-inertia = Vector3(5, 5, 5)
+inertia = Vector3(0.5, 0.5, 0.5)
+can_sleep = false
 linear_damp = 1.0
-angular_damp = 1.0
+angular_damp = 2.0
 script = ExtResource("1_klpfl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -40,15 +41,39 @@ current = true
 fov = 96.4531
 
 [node name="Floaty" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.74503, 6.45097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 6)
 
 [node name="Floaty2" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.74503, 6.45097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 6)
 
 [node name="Floaty3" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.74503, -6.54903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 1)
 
 [node name="Floaty4" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.74503, -6.54903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 1)
+
+[node name="Floaty5" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -2)
+
+[node name="Floaty6" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -2)
+
+[node name="Floaty7" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -5)
+
+[node name="Floaty8" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -5)
+
+[node name="Floaty9" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -7)
+
+[node name="Floaty10" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -7)
+
+[node name="Floaty11" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 9)
+
+[node name="Floaty12" type="Node3D" parent="." groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 9)
 
 [editable path="LowPolyShip"]

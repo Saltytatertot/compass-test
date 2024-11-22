@@ -133,7 +133,7 @@ func _physics_process(delta: float) -> void:
 # DONE: Make Ship into a Floating Body
 # TODO: Make Ship Traversible
 # DONE: Make Ship Moveable
-# TODO: Make Ship rotate.
+# DONE: Make Ship rotate.
 # DONE: Get water working
 # TODO: Get waves shader working
 # TODO: Make Islands as obstacles

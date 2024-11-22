@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://8v6sn4hv8fjp"]
+
+[ext_resource type="PackedScene" uid="uid://cb1uxahbpsd1l" path="res://Scenes/Ship.tscn" id="1_uurnj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fpwic"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_cbjp0"]
+sky_material = SubResource("ProceduralSkyMaterial_fpwic")
+
+[sub_resource type="Environment" id="Environment_du2ht"]
+background_mode = 2
+sky = SubResource("Sky_cbjp0")
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_53kyr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8kwgr"]
+transparency = 1
+albedo_color = Color(0, 0.333333, 1, 0.560784)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2dli"]
+albedo_color = Color(0.39, 0.16068, 0.0624, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t3f8a"]
+material = SubResource("StandardMaterial3D_b2dli")
+
+[node name="Water_World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_du2ht")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(150, 0, 0, 0, 2.222, 0, 0, 0, 150, 0, 0, 0)
+mesh = SubResource("PlaneMesh_53kyr")
+surface_material_override/0 = SubResource("StandardMaterial3D_8kwgr")
+
+[node name="Ship" parent="." instance=ExtResource("1_uurnj")]
+transform = Transform3D(-0.998242, 0, 0.0592716, 0, 1, 0, -0.0592716, 0, -0.998242, 0, 0.62557, 0)
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6445, 0.200413, -17.5799)
+mesh = SubResource("BoxMesh_t3f8a")
+
+[node name="Box2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.13113, 0.501363, -6.59932)
+mesh = SubResource("BoxMesh_t3f8a")
+
+[node name="Box3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13231, 0.219265, -0.347547)
+mesh = SubResource("BoxMesh_t3f8a")
+
+[node name="Box4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13231, 0.281315, 9.40184)
+mesh = SubResource("BoxMesh_t3f8a")
+
+[node name="Box5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2289, 0.281315, 14.0864)
+mesh = SubResource("BoxMesh_t3f8a")
