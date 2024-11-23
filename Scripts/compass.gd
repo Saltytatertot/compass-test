@@ -7,6 +7,7 @@ class_name Compass
 #var target_orbit_point = null
 @onready var target: MeshInstance3D = $Target
 @onready var neck: Node3D = $"../../../.."
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 #@onready var target: MeshInstance3D = $"../../../../../Target"
 #@onready var target_orbit_point: Node3D = $"../../../../../Target/TargetOrbitPoint"
@@ -34,7 +35,7 @@ func faceDirection(compass_target):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	animation_player.queue( "Held_Compass_Wobble_Loop" )
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

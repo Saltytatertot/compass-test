@@ -131,7 +131,7 @@ func _physics_process(delta: float) -> void:
 # DONE: Import Ship
 # DONE: Impport Ship's Textures
 # DONE: Make Ship into a Floating Body
-# TODO: Make Ship Traversible
+# TODO: Make Ship into activateable vehicle
 # DONE: Make Ship Moveable
 # DONE: Make Ship rotate.
 # DONE: Get water working

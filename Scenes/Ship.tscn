@@ -11,9 +11,10 @@ points = PackedVector3Array(0.018792, 0.00852118, 0.0576805, -0.0147286, 0.02527
 [node name="Ship" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62557, 0)
 input_ray_pickable = false
-inertia = Vector3(0.5, 0.5, 0.5)
+inertia = Vector3(1, 0.5, 1)
 can_sleep = false
-linear_damp = 1.0
+linear_damp = 1.5
+angular_damp_mode = 1
 angular_damp = 2.0
 script = ExtResource("1_klpfl")
 
