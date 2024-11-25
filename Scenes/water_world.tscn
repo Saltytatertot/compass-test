@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://8v6sn4hv8fjp"]
+[gd_scene load_steps=13 format=3 uid="uid://8v6sn4hv8fjp"]
 
 [ext_resource type="PackedScene" uid="uid://cb1uxahbpsd1l" path="res://Scenes/Ship.tscn" id="1_uurnj"]
+[ext_resource type="Script" path="res://Scenes/box.gd" id="2_oq586"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fpwic"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,11 +22,18 @@ tonemap_mode = 2
 transparency = 1
 albedo_color = Color(0, 0.333333, 1, 0.560784)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_miy3b"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2dli"]
 albedo_color = Color(0.39, 0.16068, 0.0624, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_t3f8a"]
 material = SubResource("StandardMaterial3D_b2dli")
+
+[sub_resource type="BoxMesh" id="BoxMesh_q1kqt"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kt0qr"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [node name="Water_World" type="Node3D"]
 
@@ -45,22 +53,95 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8kwgr")
 [node name="Ship" parent="." instance=ExtResource("1_uurnj")]
 transform = Transform3D(-0.96565, 0.259839, -0.0016544, 0.251238, 0.93202, -0.261186, -0.0663246, -0.25263, -0.965287, 0, 5, 0)
 
-[node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6445, 0.200413, -17.5799)
-mesh = SubResource("BoxMesh_t3f8a")
+[node name="DebrisGroup" type="Node3D" parent="."]
+script = ExtResource("2_oq586")
 
-[node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.13113, 0.501363, -6.59932)
-mesh = SubResource("BoxMesh_t3f8a")
+[node name="Debris" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91126, 15.6753, -17.5799)
+mass = 0.1
+gravity_scale = 0.8
+inertia = Vector3(0.1, 0.5, 0.1)
+linear_damp = 1.0
+angular_damp = 0.1
 
-[node name="Box3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13231, 0.219265, -0.347547)
-mesh = SubResource("BoxMesh_t3f8a")
+[node name="BoxCollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris"]
+shape = SubResource("BoxShape3D_miy3b")
 
-[node name="Box4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13231, 0.281315, 9.40184)
+[node name="Box" type="MeshInstance3D" parent="DebrisGroup/Debris"]
 mesh = SubResource("BoxMesh_t3f8a")
+skeleton = NodePath("../../..")
 
-[node name="Box5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2289, 0.281315, 14.0864)
+[node name="Debris2" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.800375, 15.6753, -15.2021)
+mass = 0.1
+gravity_scale = 0.8
+inertia = Vector3(0.1, 0.5, 0.1)
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="BoxCollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris2"]
+shape = SubResource("BoxShape3D_miy3b")
+
+[node name="Box" type="MeshInstance3D" parent="DebrisGroup/Debris2"]
 mesh = SubResource("BoxMesh_t3f8a")
+skeleton = NodePath("../../..")
+
+[node name="Debris3" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76294, 15.6753, -14.5757)
+mass = 0.1
+gravity_scale = 0.8
+inertia = Vector3(0.1, 0.5, 0.1)
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="BoxCollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris3"]
+shape = SubResource("BoxShape3D_miy3b")
+
+[node name="Box" type="MeshInstance3D" parent="DebrisGroup/Debris3"]
+mesh = SubResource("BoxMesh_t3f8a")
+skeleton = NodePath("../../..")
+
+[node name="Debris4" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24621, 15.6753, -17.1033)
+mass = 0.1
+gravity_scale = 0.8
+inertia = Vector3(0.1, 0.5, 0.1)
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="BoxCollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris4"]
+shape = SubResource("BoxShape3D_miy3b")
+
+[node name="Box" type="MeshInstance3D" parent="DebrisGroup/Debris4"]
+mesh = SubResource("BoxMesh_t3f8a")
+skeleton = NodePath("../../..")
+
+[node name="Debris5" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27652, 15.6753, -12.5499)
+mass = 0.1
+gravity_scale = 0.8
+inertia = Vector3(0.1, 0.5, 0.1)
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="BoxCollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris5"]
+shape = SubResource("BoxShape3D_miy3b")
+
+[node name="Box" type="MeshInstance3D" parent="DebrisGroup/Debris5"]
+mesh = SubResource("BoxMesh_t3f8a")
+skeleton = NodePath("../../..")
+
+[node name="Debris6" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 2.83928, 16.3403, -18.1781)
+mass = 0.1
+gravity_scale = 0.8
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebrisGroup/Debris6"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+mesh = SubResource("BoxMesh_q1kqt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris6"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_kt0qr")

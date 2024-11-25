@@ -11,14 +11,14 @@ points = PackedVector3Array(0.018792, 0.00852118, 0.0576805, -0.0147286, 0.02527
 [node name="Ship" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62557, 0)
 input_ray_pickable = false
-inertia = Vector3(1, 0.5, 1)
+inertia = Vector3(2, 0.5, 2)
 can_sleep = false
 linear_damp = 1.5
 angular_damp_mode = 1
 angular_damp = 2.0
 script = ExtResource("1_klpfl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="ShipCollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, -2.8213e-05, 0, 2.8213e-05, 100, 0, 2.74503, 0)
 shape = SubResource("ConvexPolygonShape3D_lag36")
 
@@ -32,12 +32,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647393, 3.75998, -4.31737)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15047, 2.75357, -0.487678)
 
 [node name="Hori" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746883, 5.12687, -4.43537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.676011, 6.13084, -4.04145)
 
 [node name="Verti" type="Node3D" parent="Hori"]
 
 [node name="Camera3D" type="Camera3D" parent="Hori/Verti"]
-transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0.0840654, 0.348561, 0.210326)
+transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0, 0, 0)
 current = true
 fov = 96.4531
 

@@ -25,6 +25,8 @@ func _unhandled_input(event: InputEvent) -> void:
 # Central force will propell the whole boat as 1 unit, 
 # apply force will do the individual floaties.
 
+# TODO Make all the floating boxes float as rigidbody3ds and physics
+
 func floaty_physics(floaties) -> void:
 	for floaty in floaties:
 		if str(floaty).contains("Floaty"):
@@ -41,6 +43,7 @@ func _physics_process(_delta: float) -> void:
 	var floaties = get_tree().get_nodes_in_group("Boat_Nodes")
 	
 	if mouse_movement != Vector2() and Input.get_mouse_mode() == 2: # Checking for MOUSE_MODE_CAPTURED
+#		NOTE 1st person position: X 0.747, Y 5.127, Z -4.435
 		hori.rotation_degrees.y -= mouse_movement.x
 		verti.rotation_degrees.x += mouse_movement.y
 		if verti.rotation_degrees.x <= -40:
