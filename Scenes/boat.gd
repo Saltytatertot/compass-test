@@ -32,7 +32,7 @@ func floaty_physics(floaties) -> void:
 		if str(floaty).contains("Floaty"):
 			if floaty.global_transform.origin.y <= 0:
 				#print(floaty)
-				apply_force( Vector3.UP * 5 * -floaty.global_transform.origin , floaty.global_transform.origin - global_transform.origin )
+				apply_force( Vector3.UP * 50 * -floaty.global_transform.origin , floaty.global_transform.origin - global_transform.origin )
 				#apply_central_force(Vector3.UP * 1 * -floaty.global_transform.origin)
 
 func _input(event: InputEvent) -> void:
@@ -55,16 +55,16 @@ func _physics_process(_delta: float) -> void:
 #	Movement is propulsion based, right now it puts the force from the direction of the vector.
 #	DONE Apply torque doesn't seem to be working, rotational_degrees will work for now. 
 	if Input.is_action_pressed( "Forward" ):
-		apply_central_force( global_transform.basis * Vector3.BACK * 15)
+		apply_central_force( global_transform.basis * Vector3.BACK * 150)
 
 	elif Input.is_action_pressed( "Backward" ):
-		apply_central_force( global_transform.basis * Vector3.FORWARD * 10)
+		apply_central_force( global_transform.basis * Vector3.FORWARD * 100)
 
 	if Input.is_action_pressed( "Right" ):
-		apply_torque( Vector3( 0,-0.5,0 ))
+		apply_torque( Vector3( 0,-5,0 ))
 
 	if Input.is_action_pressed( "Left" ):
-		apply_torque( Vector3( 0,0.5,0 ) )
+		apply_torque( Vector3( 0,5,0 ) )
 		#animation_player.play("Ship_tilt_left")
 
 	floaty_physics(floaties)

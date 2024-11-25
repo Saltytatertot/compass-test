@@ -11,7 +11,8 @@ points = PackedVector3Array(0.018792, 0.00852118, 0.0576805, -0.0147286, 0.02527
 [node name="Ship" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62557, 0)
 input_ray_pickable = false
-inertia = Vector3(2, 0.5, 2)
+mass = 10.0
+inertia = Vector3(20, 5, 20)
 can_sleep = false
 linear_damp = 1.5
 angular_damp_mode = 1
@@ -37,9 +38,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.676011, 6.13084, -4.04145)
 [node name="Verti" type="Node3D" parent="Hori"]
 
 [node name="Camera3D" type="Camera3D" parent="Hori/Verti"]
-transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0, 0, 0)
+transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0, 3.10954, -5.71648)
 current = true
-fov = 96.4531
+fov = 92.126
 
 [node name="Floaty" type="Node3D" parent="." groups=["Boat_Nodes"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 6)
