@@ -3,7 +3,7 @@ extends RigidBody3D
 @onready var hori: Node3D = $Hori
 @onready var verti: Node3D = $Hori/Verti
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
-# TODO: Figure out why adding the animation player inverts the starting rotation by 180 deg. for the boat
+# DONE: Figure out why adding the animation player inverts the starting rotation by 180 deg. for the boat
 
 var mouse_movement = Vector2()
 #var current_velocity : Vector3 = (linear_velocity * transform.basis.transposed())
@@ -21,11 +21,11 @@ func _unhandled_input(event: InputEvent) -> void:
 # DONE: Dividing the floaty global by global is the issue. Probably a divide by zero error.
 
 # DONE: Fix Boat being still jittery once entering the water
-# TODO: Determine the best use case for central force and apply force. 
+# DONE: Determine the best use case for central force and apply force. 
 # Central force will propell the whole boat as 1 unit, 
 # apply force will do the individual floaties.
 
-# TODO Make all the floating boxes float as rigidbody3ds and physics
+# DONE Make all the floating boxes float as rigidbody3ds and physics
 
 func floaty_physics(floaties) -> void:
 	for floaty in floaties:
@@ -78,8 +78,15 @@ func _physics_process(_delta: float) -> void:
 	#if $Floaty4.global_transform.origin.y <= 0:
 				#apply_force(Vector3.UP*1*-$Floaty4.global_transform.origin, $Floaty4.global_transform.origin - global_transform.origin)	
 #
-	
-	
-	
-	
+# TODO: Make ship influenced by wind
+# TODO: Add in waves via shader
+# TODO: Make ship move autonomously
+# TODO: Make ship navigable while in motion.
+# TODO: Make ship Sails have different states, either progressive, or finite
+# TODO: Make ship wheel activatable
+# TODO: Make ship climb-able via hull and rigging?
+# TODO: Make ship dockable
+# TODO: Add an anchor.
+# TODO: Adjust camera for 1st person
+# TODO: Add in storms
 	

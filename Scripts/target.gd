@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 @onready var target_orbit_point: Node3D = $TargetOrbitPoint
 
-var randRangeval : int = 120
+var randRangeval : int = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

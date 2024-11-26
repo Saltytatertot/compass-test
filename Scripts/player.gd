@@ -114,30 +114,29 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	#print( self.get_global_position().x, self.get_global_position().y, self.get_global_position().z )
-# DONE: Get Compass Wokring
-# DONE: Get neck movement working
+# TODO: Make Ship into activateable vehicle
 # TODO: Put FPS view on seperate layer, attached to camera?
 # TODO: Make different points for compass to point to
-# DONE: Make Compass into its own object seperate from the player.
-# DONE: Make Compass pick-up-able
 # TODO: Make Compass droppable via key
 # TODO: Add highlight to compass and other pickups
 # TODO: Make Compass visuals more dynamic
-#		DONE: Compass needle now has some fuzz to it.
 		#TODO: Make compass wobble a little bit via animation player
 # TODO: Add in pistol weapon
-# DONE: Add in telescope
 # TODO: Make Spyglass function like a telescope
-# DONE: Import Ship
-# DONE: Impport Ship's Textures
-# DONE: Make Ship into a Floating Body
-# TODO: Make Ship into activateable vehicle
-# DONE: Make Ship Moveable
-# DONE: Make Ship rotate.
-# DONE: Get water working
 # TODO: Get waves shader working
 # TODO: Make Islands as obstacles
 # TODO: Make Procedural Targets to Sail to.
 # TODO: Add in dogs for passengers to sail
 # TODO: Make compass work like a north facing compass.
-# TODO: 
+# DONE: Get Compass Wokring
+# DONE: Get neck movement working
+# DONE: Make Compass into its own object seperate from the player.
+# DONE: Make Compass pick-up-able
+#		DONE: Compass needle now has some fuzz to it.
+# DONE: Add in telescope
+# DONE: Import Ship
+# DONE: Impport Ship's Textures
+# DONE: Make Ship into a Floating Body
+# DONE: Make Ship Moveable
+# DONE: Make Ship rotate.
+# DONE: Get water working
