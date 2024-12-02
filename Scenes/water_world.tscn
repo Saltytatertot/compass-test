@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://8v6sn4hv8fjp"]
+[gd_scene load_steps=15 format=3 uid="uid://8v6sn4hv8fjp"]
 
 [ext_resource type="PackedScene" uid="uid://cb1uxahbpsd1l" path="res://Scenes/Ship.tscn" id="1_uurnj"]
 [ext_resource type="Script" path="res://Scenes/box.gd" id="2_oq586"]
+[ext_resource type="PackedScene" uid="uid://imt13oet5uta" path="res://Scenes/water_plane.tscn" id="3_nb18y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fpwic"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,6 +36,8 @@ material = SubResource("StandardMaterial3D_b2dli")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kt0qr"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b35s5"]
 
 [node name="Water_World" type="Node3D"]
 
@@ -146,3 +149,10 @@ mesh = SubResource("BoxMesh_q1kqt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris6"]
 transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_kt0qr")
+
+[node name="WaterPlane" parent="." instance=ExtResource("3_nb18y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126683, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.396631, 0, 0, 0, 0.422997, 0, 0, 0, 0.301881, 0, 0.109888, 0)
+mesh = SubResource("CylinderMesh_b35s5")
