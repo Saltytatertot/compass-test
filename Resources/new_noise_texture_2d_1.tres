@@ -1,0 +1,11 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://v1g7ievr7wur"]
+
+[ext_resource type="FastNoiseLite" uid="uid://cx8qj4tcv0870" path="res://Resources/new_fast_noise_lite_1.tres" id="1_drpyg"]
+
+[resource]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = ExtResource("1_drpyg")

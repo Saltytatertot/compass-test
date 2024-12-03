@@ -1,11 +1,11 @@
 shader_type spatial;
 
-uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
-uniform sampler2D SCREEN_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 
-uniform vec3 albedo : source_color;
-uniform vec3 albedo2 : source_color;
+uniform vec4 albedo : source_color;
+uniform vec4 albedo2 : source_color;
 uniform float metallic : hint_range(0.0, 1.0) = 1.0;
 uniform float roughness : hint_range(0.0, 1.0) = 0.02;
 
@@ -24,10 +24,10 @@ uniform vec3 color_shallow : source_color = vec3(0.0, 0.47, 0.76);
 uniform float beers_law = 2.0;
 uniform float depth_offset = 1.5;
 
-uniform float edge_scale = 0.3;
-uniform float near = 1.0;
+uniform float edge_scale : hint_range(0.0, 1.0, 0.05) = 0.1;
+uniform float near = 0.5;
 uniform float far = 100.0;
-uniform vec3 edge_color : source_color = vec3(1.0, 1.0, 1.0);
+uniform vec3 edge_color : source_color; //= vec3(1.0, 1.0, 1.0);
 
 
 // Varying Variables
@@ -55,9 +55,9 @@ void vertex() {
 // Called for every pixel the material is visible on.
 void fragment() {
 //	Controls depth coloration
-	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).x;
+	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV, 0.0).r;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_texture);
-	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0); 
+	vec4 view = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0); 
 	view.xyz /= view.w;
 	float depth_blend = exp((-view.z+VERTEX.z + depth_offset) * -beers_law);
 	depth_blend = clamp(1.0 - depth_blend, 0.0, 1.0);
@@ -69,7 +69,7 @@ void fragment() {
 	
 	float z_depth = edge(texture(DEPTH_TEXTURE, SCREEN_UV).x);
 	float z_pos = edge(FRAGCOORD.z);
-	float z_dif = z_depth - z_pos;
+	float z_dif =  z_pos - z_depth;
 	
 //	Main shader of the water.
 	vec2 time = (TIME * wave_direction) * time_scale;
@@ -78,13 +78,13 @@ void fragment() {
 	
 	
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
-	vec3 surface_color = mix(albedo, albedo2, fresnel);
+	vec3 surface_color = mix(albedo.rgb, albedo2.rgb, fresnel);
 	
 	vec3 depth_color_adj = mix(edge_color, color, step(edge_scale, z_dif));
 	
 	//vec3 normal = texture(texture_normal, UV).rgb;
-	//ALBEDO = mix( surface_color, color, 0.75 );
-	ALBEDO = clamp(surface_color + depth_color_adj, vec3(0.0), vec3(1.0));
+	ALBEDO = mix( surface_color, color, 0.75 );
+	//ALBEDO = clamp(surface_color + depth_color_adj, vec3(0.0), vec3(1.0));
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
 	NORMAL_MAP = normal_blend;

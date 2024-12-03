@@ -43,7 +43,6 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_energy = 0.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -151,8 +150,8 @@ transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
 [node name="WaterPlane" parent="." instance=ExtResource("3_nb18y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126683, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126683, -18.9864)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.396631, 0, 0, 0, 0.422997, 0, 0, 0, 0.301881, 0, 0.109888, 0)
+transform = Transform3D(0.396631, 0, 0, 0, 0.422997, 0, 0, 0, 0.301881, 0, 0.265654, -18.9864)
 mesh = SubResource("CylinderMesh_b35s5")
