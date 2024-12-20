@@ -38,44 +38,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.676011, 6.13084, -4.04145)
 [node name="Verti" type="Node3D" parent="Hori"]
 
 [node name="Camera3D" type="Camera3D" parent="Hori/Verti"]
-transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0, 3.10954, -5.71648)
+transform = Transform3D(-0.99298, 2.95501e-07, 0.118282, 0.0607289, 0.858136, 0.509818, -0.101502, 0.513422, -0.852112, 0, 3.11, -5.716)
 current = true
 fov = 92.126
 
-[node name="Floaty" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 6)
+[node name="FloatyContaier" type="Node3D" parent="."]
 
-[node name="Floaty2" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 6)
+[node name="Floaty" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, 6)
 
-[node name="Floaty3" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 1)
+[node name="Floaty2" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, 6)
 
-[node name="Floaty4" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 1)
+[node name="Floaty3" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, 1)
 
-[node name="Floaty5" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -2)
+[node name="Floaty4" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, 1)
 
-[node name="Floaty6" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -2)
+[node name="Floaty5" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, -2)
 
-[node name="Floaty7" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -5)
+[node name="Floaty6" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, -2)
 
-[node name="Floaty8" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -5)
+[node name="Floaty7" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, -5)
 
-[node name="Floaty9" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, -7)
+[node name="Floaty8" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, -5)
 
-[node name="Floaty10" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, -7)
+[node name="Floaty9" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, -7)
 
-[node name="Floaty11" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.745, 9)
+[node name="Floaty10" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, -7)
 
-[node name="Floaty12" type="Node3D" parent="." groups=["Boat_Nodes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.745, 9)
+[node name="Floaty11" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.3, 9)
+
+[node name="Floaty12" type="Node3D" parent="FloatyContaier" groups=["Boat_Nodes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.3, 9)
 
 [editable path="LowPolyShip"]

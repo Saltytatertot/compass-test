@@ -1,14 +1,23 @@
 extends RigidBody3D
 
+@export var water_drag := 0.05
+@export var water_angular_drag := 0.05
+@export var float_force := 1.0
+
+@onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var hori: Node3D = $Hori
 @onready var verti: Node3D = $Hori/Verti
-#@onready var animation_player: AnimationPlayer = $AnimationPlayer
-# DONE: Figure out why adding the animation player inverts the starting rotation by 180 deg. for the boat
+@onready var water_plane = get_node('/root/Water_World/WaterPlane')
+
+@onready var floaty_contaier = $FloatyContaier.get_children()
+@onready var camera_3d: Camera3D = $Hori/Verti/Camera3D
+
 
 var mouse_movement = Vector2()
 #var current_velocity : Vector3 = (linear_velocity * transform.basis.transposed())
 var moving_rotational_degrees = 0.5
 var stationary_rotational_degrees = 0.4
+var submerged := false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -17,35 +26,43 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
-# DONE: Figure out why this seems to be causing an infinite error after the floaties touch the water. It seems to be the floaties themselves.
-# DONE: Dividing the floaty global by global is the issue. Probably a divide by zero error.
 
-# DONE: Fix Boat being still jittery once entering the water
-# DONE: Determine the best use case for central force and apply force. 
 # Central force will propell the whole boat as 1 unit, 
 # apply force will do the individual floaties.
 
-# DONE Make all the floating boxes float as rigidbody3ds and physics
 
-func floaty_physics(floaties) -> void:
-	for floaty in floaties:
-		if str(floaty).contains("Floaty"):
-			if floaty.global_transform.origin.y <= 0:
-				#print(floaty)
-				apply_force( Vector3.UP * 50 * -floaty.global_transform.origin , floaty.global_transform.origin - global_transform.origin )
-				#apply_central_force(Vector3.UP * 1 * -floaty.global_transform.origin)
+
+func floaty_physics() -> void:
+	submerged = false
+	for floaty in floaty_contaier:
+		#if str(floaty).contains("Floaty"):
+		var depth = water_plane.get_height(floaty.global_position) - floaty.global_position.y
+		if depth > 0:
+			#print(floaty)
+			submerged = true
+			apply_force( Vector3.UP * float_force * gravity * depth, floaty.global_position - global_position )
+			#apply_central_force(Vector3.UP * 1 * -floaty.global_transform.origin)
+
+func _integrate_forces(state: PhysicsDirectBodyState3D):
+	if submerged:
+		state.linear_velocity *= 1 - water_drag
+		state.angular_velocity *= 1 - water_angular_drag
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement += event.relative
 		
 func _physics_process(_delta: float) -> void:
-	var floaties = get_tree().get_nodes_in_group("Boat_Nodes")
+	#var floaties = get_tree().get_nodes_in_group("Boat_Nodes")
 	
 	if mouse_movement != Vector2() and Input.get_mouse_mode() == 2: # Checking for MOUSE_MODE_CAPTURED
 #		NOTE 1st person position: X 0.747, Y 5.127, Z -4.435
+#		NOTE 3rd person position: X 0, Y 3.11, Z -5.716
 		hori.rotation_degrees.y -= mouse_movement.x
 		verti.rotation_degrees.x += mouse_movement.y
+		hori.rotation_degrees.z = 0
+		verti.rotation_degrees.z = 0
+		
 		if verti.rotation_degrees.x <= -40:
 			verti.rotation_degrees.x = -40
 		if verti.rotation_degrees.x >= 0:
@@ -53,7 +70,6 @@ func _physics_process(_delta: float) -> void:
 		mouse_movement = Vector2()
 
 #	Movement is propulsion based, right now it puts the force from the direction of the vector.
-#	DONE Apply torque doesn't seem to be working, rotational_degrees will work for now. 
 	if Input.is_action_pressed( "Forward" ):
 		apply_central_force( global_transform.basis * Vector3.BACK * 150)
 
@@ -65,9 +81,8 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_pressed( "Left" ):
 		apply_torque( Vector3( 0,5,0 ) )
-		#animation_player.play("Ship_tilt_left")
 
-	floaty_physics(floaties)
+	floaty_physics()
 	
 	#if $Floaty.global_transform.origin.y <= 0:
 				#apply_force(Vector3.UP*1*-$Floaty.global_transform.origin, $Floaty.global_transform.origin - global_transform.origin)	
@@ -79,9 +94,11 @@ func _physics_process(_delta: float) -> void:
 				#apply_force(Vector3.UP*1*-$Floaty4.global_transform.origin, $Floaty4.global_transform.origin - global_transform.origin)	
 #
 # TODO: Make ship influenced by wind
-# TODO: Add in waves via shader
+# TODO: Make the water infinitly traversable
 # TODO: Make ship move autonomously
-# TODO: Make ship navigable while in motion.
+# TODO: Make ship traversible while in motion.
+# TODO: Make underwater camera effect
+# TODO: Make camera Stable to world rather than boat
 # TODO: Make ship Sails have different states, either progressive, or finite
 # TODO: Make ship wheel activatable
 # TODO: Make ship climb-able via hull and rigging?
@@ -89,4 +106,12 @@ func _physics_process(_delta: float) -> void:
 # TODO: Add an anchor.
 # TODO: Adjust camera for 1st person
 # TODO: Add in storms
-	
+# DONE: Add in waves via shader
+# DONE: Make things float via the shader
+#DONE Apply torque doesn't seem to be working, rotational_degrees will work for now. 
+# DONE: Figure out why this seems to be causing an infinite error after the floaties touch the water. It seems to be the floaties themselves.
+# DONE: Dividing the floaty global by global is the issue. Probably a divide by zero error.
+# DONE: Fix Boat being still jittery once entering the water
+# DONE: Determine the best use case for central force and apply force. 
+# DONE: Figure out why adding the animation player inverts the starting rotation by 180 deg. for the boat
+# DONE Make all the floating boxes float as rigidbody3ds and physics	

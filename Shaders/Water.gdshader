@@ -7,17 +7,19 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 uniform vec4 albedo : source_color;
 uniform vec4 albedo2 : source_color;
 uniform float metallic : hint_range(0.0, 1.0) = 1.0;
-uniform float roughness : hint_range(0.0, 1.0) = 0.02;
+uniform float roughness : hint_range(0.0, 1.0) = 0.525;
 
 uniform sampler2D wave;
 
 uniform sampler2D texture_normal;
 uniform sampler2D texture_normal2;
+uniform float wave_time = 0;
+uniform float wave_speed = 0.1;
 uniform vec2 wave_direction = vec2( 2.0, 0.0 );
 uniform vec2 wave_direction2 = vec2( 0.0, 1.0 );
-uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.025;
-uniform float noise_scale = 10.0;
-uniform float height_scale = 0.15;
+uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.1;
+uniform float noise_scale = 30.0;
+uniform float height_scale = 1.025;
 
 uniform vec3 color_deep : source_color = vec3(0.11,0.29,0.33);
 uniform vec3 color_shallow : source_color = vec3(0.0, 0.47, 0.76);
@@ -33,6 +35,7 @@ uniform vec3 edge_color : source_color; //= vec3(1.0, 1.0, 1.0);
 // Varying Variables
 varying float height;
 varying vec3 world_position;
+//varying float 
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -48,7 +51,7 @@ float edge( float depth )
 
 void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	height = texture(wave, world_position.xz / noise_scale + TIME * time_scale).r;
+	height = texture(wave, world_position.xz / noise_scale + wave_time * wave_speed).r;
 	VERTEX.y += height * height_scale;
 }
 

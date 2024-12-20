@@ -50,11 +50,12 @@ environment = SubResource("Environment_du2ht")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(150, 0, 0, 0, 2.222, 0, 0, 0, 150, 0, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_53kyr")
 surface_material_override/0 = SubResource("StandardMaterial3D_8kwgr")
 
 [node name="Ship" parent="." instance=ExtResource("1_uurnj")]
-transform = Transform3D(-0.96565, 0.259839, -0.0016544, 0.251238, 0.93202, -0.261186, -0.0663246, -0.25263, -0.965287, 0, 5, 0)
+transform = Transform3D(-0.96565, 0.259839, -0.0016544, 0.251238, 0.93202, -0.261186, -0.0663246, -0.25263, -0.965287, 0, 14.7686, 0)
 
 [node name="DebrisGroup" type="Node3D" parent="."]
 script = ExtResource("2_oq586")
@@ -149,8 +150,38 @@ mesh = SubResource("BoxMesh_q1kqt")
 transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
+[node name="Debris7" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, -0.16072, 16.3403, -18.1781)
+mass = 0.1
+gravity_scale = 0.8
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebrisGroup/Debris7"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+mesh = SubResource("BoxMesh_q1kqt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris7"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_kt0qr")
+
+[node name="Debris8" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 1.83928, 16.3403, -22.1781)
+mass = 0.1
+gravity_scale = 0.8
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebrisGroup/Debris8"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+mesh = SubResource("BoxMesh_q1kqt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebrisGroup/Debris8"]
+transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_kt0qr")
+
 [node name="WaterPlane" parent="." instance=ExtResource("3_nb18y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126683, -18.9864)
+transform = Transform3D(6.44345, 0, 0, 0, 1.04357, 0, 0, 0, 9.66367, 2.652, 0.126683, 2.12505)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.396631, 0, 0, 0, 0.422997, 0, 0, 0, 0.301881, 0, 0.265654, -18.9864)
