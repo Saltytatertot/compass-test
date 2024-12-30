@@ -3,9 +3,10 @@
 [ext_resource type="FastNoiseLite" uid="uid://bqfppe452ko6p" path="res://Resources/new_fast_noise_lite_2.tres" id="1_88vee"]
 
 [resource]
-width = 1024
-height = 1024
+width = 256
+height = 256
 seamless = true
+seamless_blend_skirt = 1.0
 as_normal_map = true
 bump_strength = 1.0
 noise = ExtResource("1_88vee")

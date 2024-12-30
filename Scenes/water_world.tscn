@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://8v6sn4hv8fjp"]
+[gd_scene load_steps=14 format=3 uid="uid://8v6sn4hv8fjp"]
 
 [ext_resource type="PackedScene" uid="uid://cb1uxahbpsd1l" path="res://Scenes/Ship.tscn" id="1_uurnj"]
 [ext_resource type="Script" path="res://Scenes/box.gd" id="2_oq586"]
@@ -37,13 +37,10 @@ material = SubResource("StandardMaterial3D_b2dli")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kt0qr"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_b35s5"]
-
 [node name="Water_World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_du2ht")
@@ -55,13 +52,13 @@ mesh = SubResource("PlaneMesh_53kyr")
 surface_material_override/0 = SubResource("StandardMaterial3D_8kwgr")
 
 [node name="Ship" parent="." instance=ExtResource("1_uurnj")]
-transform = Transform3D(-0.96565, 0.259839, -0.0016544, 0.251238, 0.93202, -0.261186, -0.0663246, -0.25263, -0.965287, 0, 14.7686, 0)
+transform = Transform3D(-0.999998, 0, -0.00174537, 0, 1, 0, 0.00174537, 0, -0.999998, 0, 14.7686, 4.17733)
 
 [node name="DebrisGroup" type="Node3D" parent="."]
 script = ExtResource("2_oq586")
 
 [node name="Debris" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91126, 15.6753, -17.5799)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91126, 0, -17.5799)
 mass = 0.1
 gravity_scale = 0.8
 inertia = Vector3(0.1, 0.5, 0.1)
@@ -76,7 +73,7 @@ mesh = SubResource("BoxMesh_t3f8a")
 skeleton = NodePath("../../..")
 
 [node name="Debris2" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.800375, 15.6753, -15.2021)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.800375, 0, -15.2021)
 mass = 0.1
 gravity_scale = 0.8
 inertia = Vector3(0.1, 0.5, 0.1)
@@ -91,7 +88,7 @@ mesh = SubResource("BoxMesh_t3f8a")
 skeleton = NodePath("../../..")
 
 [node name="Debris3" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76294, 15.6753, -14.5757)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76294, 0, -14.5757)
 mass = 0.1
 gravity_scale = 0.8
 inertia = Vector3(0.1, 0.5, 0.1)
@@ -106,7 +103,7 @@ mesh = SubResource("BoxMesh_t3f8a")
 skeleton = NodePath("../../..")
 
 [node name="Debris4" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24621, 15.6753, -17.1033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24621, 0, -17.1033)
 mass = 0.1
 gravity_scale = 0.8
 inertia = Vector3(0.1, 0.5, 0.1)
@@ -121,7 +118,7 @@ mesh = SubResource("BoxMesh_t3f8a")
 skeleton = NodePath("../../..")
 
 [node name="Debris5" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27652, 15.6753, -12.5499)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27652, 0, -12.5499)
 mass = 0.1
 gravity_scale = 0.8
 inertia = Vector3(0.1, 0.5, 0.1)
@@ -136,7 +133,7 @@ mesh = SubResource("BoxMesh_t3f8a")
 skeleton = NodePath("../../..")
 
 [node name="Debris6" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 2.83928, 16.3403, -18.1781)
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 2.83928, 0, -18.1781)
 mass = 0.1
 gravity_scale = 0.8
 linear_damp = 1.0
@@ -151,7 +148,7 @@ transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
 [node name="Debris7" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, -0.16072, 16.3403, -18.1781)
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, -0.16072, 0, -18.1781)
 mass = 0.1
 gravity_scale = 0.8
 linear_damp = 1.0
@@ -166,7 +163,7 @@ transform = Transform3D(0.397387, 0, 0, 0, 0.137027, 0, 0, 0, 2.25443, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
 [node name="Debris8" type="RigidBody3D" parent="DebrisGroup" groups=["Debris"]]
-transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 1.83928, 16.3403, -22.1781)
+transform = Transform3D(1.00227, 0, 0, 0, 1.00227, 0, 0, 0, 1.00227, 1.83928, 0, -22.1781)
 mass = 0.1
 gravity_scale = 0.8
 linear_damp = 1.0
@@ -182,7 +179,3 @@ shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
 [node name="WaterPlane" parent="." instance=ExtResource("3_nb18y")]
 transform = Transform3D(6.44345, 0, 0, 0, 1.04357, 0, 0, 0, 9.66367, 2.652, 0.126683, 2.12505)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.396631, 0, 0, 0, 0.422997, 0, 0, 0, 0.301881, 0, 0.265654, -18.9864)
-mesh = SubResource("CylinderMesh_b35s5")

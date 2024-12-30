@@ -8,7 +8,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_l15er")
-shader_parameter/albedo = Color(0, 0.56682, 0.760369, 1)
+shader_parameter/albedo = Color(0, 0.549539, 0.732719, 1)
 shader_parameter/albedo2 = Color(1.92523e-06, 0.974322, 0.990997, 1)
 shader_parameter/metallic = 1.0
 shader_parameter/roughness = 0.525
@@ -17,12 +17,12 @@ shader_parameter/wave_speed = 0.1
 shader_parameter/wave_direction = Vector2(3, 0)
 shader_parameter/wave_direction2 = Vector2(0, 1)
 shader_parameter/time_scale = 0.1
-shader_parameter/noise_scale = 50.0
-shader_parameter/height_scale = 4.0
-shader_parameter/color_deep = Color(0.0858, 0.228063, 0.26, 1)
-shader_parameter/color_shallow = Color(0, 0.3145, 0.51, 1)
+shader_parameter/noise_scale = 30.0
+shader_parameter/height_scale = 1.025
+shader_parameter/color_deep = Color(0.202258, 0.537617, 0.612903, 1)
+shader_parameter/color_shallow = Color(0.4104, 0.625987, 0.76, 1)
 shader_parameter/beers_law = 2.0
-shader_parameter/depth_offset = -0.75
+shader_parameter/depth_offset = 1.5
 shader_parameter/edge_scale = 0.1
 shader_parameter/near = 1.0
 shader_parameter/far = 100.0

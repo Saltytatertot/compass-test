@@ -2,6 +2,8 @@
 
 [resource]
 noise_type = 2
+seed = 10
+frequency = 0.0186
 fractal_type = 2
 fractal_octaves = 1
 fractal_lacunarity = 10.0

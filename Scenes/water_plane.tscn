@@ -33,8 +33,4 @@ environment = SubResource("Environment_as8fp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.572146, -0.565593, 0.593931, 0, 0.724172, 0.68962, -0.820152, 0.394563, -0.414332, 0, 0, 0)
-visible = false
 shadow_enabled = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.090928, 0, -0.995857, 0, 1, 0, 0.995857, 0, -0.090928, -10.2606, 4.11812, 0)
