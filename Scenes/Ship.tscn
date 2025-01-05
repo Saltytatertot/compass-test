@@ -11,7 +11,7 @@ points = PackedVector3Array(0.018792, 0.00852118, 0.0576805, -0.0147286, 0.02527
 [sub_resource type="BoxMesh" id="BoxMesh_4ae5m"]
 
 [node name="Ship" type="RigidBody3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 input_ray_pickable = false
 mass = 10.0
 inertia = Vector3(20, 5, 20)

@@ -1,3 +1,4 @@
+@tool
 extends MeshInstance3D
 
 var material: ShaderMaterial
@@ -11,7 +12,11 @@ var time: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.mesh.set_subdivide_depth(199)
+	self.mesh.set_subdivide_width(199)
+	
 	material = mesh.surface_get_material(0)
+	
 	noise = material.get_shader_parameter("wave").noise.get_seamless_image(512, 512)
 	noise_scale = material.get_shader_parameter("noise_scale")
 	wave_speed = material.get_shader_parameter("wave_speed")

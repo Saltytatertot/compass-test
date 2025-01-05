@@ -3,12 +3,11 @@
 [ext_resource type="Material" uid="uid://bae4wde5yeg7h" path="res://Shaders/Water_shader_material.tres" id="1_ejws8"]
 [ext_resource type="Script" path="res://Scenes/water_plane.gd" id="2_3pvwp"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_37aom"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_b8a1l"]
 material = ExtResource("1_ejws8")
-size = Vector2(10, 10)
-subdivide_width = 100
-subdivide_depth = 100
-orientation = 1
+size = Vector2(100.05, 100.05)
+subdivide_width = 199
+subdivide_depth = 199
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fhah8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,7 +24,7 @@ tonemap_mode = 2
 [node name="WaterPlane" type="MeshInstance3D"]
 transform = Transform3D(0.993161, 0, 0, 0, 0.993161, 0, 0, 0, 0.993161, 0, 0, 0)
 cast_shadow = 0
-mesh = SubResource("QuadMesh_37aom")
+mesh = SubResource("PlaneMesh_b8a1l")
 script = ExtResource("2_3pvwp")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -33,4 +32,5 @@ environment = SubResource("Environment_as8fp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.572146, -0.565593, 0.593931, 0, 0.724172, 0.68962, -0.820152, 0.394563, -0.414332, 0, 0, 0)
+visible = false
 shadow_enabled = true

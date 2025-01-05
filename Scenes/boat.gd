@@ -1,8 +1,11 @@
 extends RigidBody3D
 
 @export var water_drag := 0.05
-@export var water_angular_drag := 0.05
+@export var water_angular_drag := 0.50
 @export var float_force := 1.0
+@export var forward_const_force = 400
+@export var backward_const_force = 300
+@export var rotational_const_force = 30
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var hori: Node3D = $Hori
@@ -11,6 +14,7 @@ extends RigidBody3D
 
 @onready var floaty_contaier = $FloatyContaier.get_children()
 @onready var camera_3d: Camera3D = $Hori/Verti/Camera3D
+@onready var ocean: Node3D = $"../Ocean"
 
 var mouse_movement = Vector2()
 #var current_velocity : Vector3 = (linear_velocity * transform.basis.transposed())
@@ -105,22 +109,36 @@ func _physics_process(_delta: float) -> void:
 
 #	Movement is propulsion based, right now it puts the force from the direction of the vector.
 	if Input.is_action_pressed( "Forward" ):
-		apply_central_force( global_transform.basis * Vector3.BACK * 150)
-		var h = hori.rotation_degrees
-		#print("X: ", h.x, " Y: ", h.y, " Z: ", h.z)
-		#print("Y: ", camera_3d.rotation_degrees.y)
-		#print("Z: ", h.z)
+		apply_central_force( global_transform.basis * Vector3.BACK * forward_const_force)
+		#apply_torque( Vector3( 100, 0, 0) )
 
 	elif Input.is_action_pressed( "Backward" ):
-		apply_central_force( global_transform.basis * Vector3.FORWARD * 100)
+		apply_central_force( global_transform.basis * Vector3.FORWARD * backward_const_force)
+		#apply_torque( Vector3( -100, 0, 0) )
 
 	if Input.is_action_pressed( "Right" ):
-		apply_torque( Vector3( 0,-5,0 ))
+#		Will rotate towards the world direction, not the boat direction.
+#		TODO: See if can make torque apply locally to the boat, instead of globally?
+		if rotation_degrees.y > 0:
+			apply_torque( Vector3( 0,-rotational_const_force, 75 ))
+		else:
+			apply_torque( Vector3( 0,-rotational_const_force, -75 ))
+			
+		#add_constant_torque(Vector3( 0,-rotational_const_force, 75 ))
+		print(rotation_degrees.y)
+		print(rotation_degrees.z)
+		
 
 	if Input.is_action_pressed( "Left" ):
-		apply_torque( Vector3( 0,5,0 ) )
+		apply_torque( Vector3( 0,rotational_const_force, -75 ) )
+		print(rotation_degrees.z)
 
 	floaty_physics()
+	ocean.position.x = self.position.x
+	ocean.position.z = self.position.z
+	#water_plane.position.x = self.position.x
+	#water_plane.position.z = self.position.z
+	
 	
 	#if $Floaty.global_transform.origin.y <= 0:
 				#apply_force(Vector3.UP*1*-$Floaty.global_transform.origin, $Floaty.global_transform.origin - global_transform.origin)	

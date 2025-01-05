@@ -3,6 +3,8 @@ shader_type spatial;
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
+global uniform vec3 OCEAN_POSITION; // Global shader value for the player position
+
 
 uniform vec4 albedo : source_color;
 uniform vec4 albedo2 : source_color;
@@ -10,7 +12,7 @@ uniform float metallic : hint_range(0.0, 1.0) = 1.0;
 uniform float roughness : hint_range(0.0, 1.0) = 0.525;
 
 uniform sampler2D wave;
-
+uniform sampler2D wave_bump; // Normal bump map version of the noise wave texture
 uniform sampler2D texture_normal;
 uniform sampler2D texture_normal2;
 uniform float wave_time = 0;
@@ -35,7 +37,9 @@ uniform vec3 edge_color : source_color; //= vec3(1.0, 1.0, 1.0);
 // Varying Variables
 varying float height;
 varying vec3 world_position;
-//varying float 
+varying float vertex_distance;
+varying float vertex_distance_clamped;
+varying vec2 vertex_position;
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -48,15 +52,64 @@ float edge( float depth )
 	return near * far / (far + depth * (near - far));
 }
 
+float waveheight(vec2 offset, int mode) 
+{
+	float h1 = 0.0;
+	float h2 = 0.0;
+	float hmix = 0.0;
+	switch (mode) 
+	{
+	// height = texture(wave, world_position.xz / noise_scale + wave_time * wave_speed).r;
+		case 0: // For getting Wave 1 Height
+			h1 = texture(wave, (world_position.xz + offset) / noise_scale + wave_time * wave_speed).r;
+			return h1;
+		case 1: // For getting Wave 2 Height
+			h2 = texture(wave, (world_position.xz + offset) / noise_scale + wave_time * wave_speed).r;
+			return h2;
+		case 2:	// For getting Wave 1 and Wave 2 Height Average
+			h1 = texture(wave, (world_position.xz + offset) / noise_scale + wave_time * wave_speed).r;
+			h2 = texture(wave, (world_position.xz + offset) / noise_scale + wave_time * wave_speed).r;
+			hmix = mix(h1, h2, 0.5);
+			return hmix;
+	}
+	return 0.0;
+}
 
-void vertex() {
+void vertex() 
+{
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	height = texture(wave, world_position.xz / noise_scale + wave_time * wave_speed).r;
-	VERTEX.y += height * height_scale;
+	
+	vertex_distance = distance(world_position,OCEAN_POSITION);
+	vertex_distance = clamp(vertex_distance, 0.0, 85.0);
+	vertex_distance_clamped = vertex_distance / 85.0;
+	
+	//height = texture(wave, world_position.xz / noise_scale + wave_time * wave_speed).r;
+	float prev_height_x = waveheight(vec2(-0.3,0.0), 2);
+	float next_height_x = waveheight(vec2(0.3,0.0), 2);
+	float prev_height_y = waveheight(vec2(0.0,-0.3), 2);
+	float next_height_y = waveheight(vec2(0.0,0.3), 2);
+	float height_mix = waveheight(vec2(0.0,0.0), 2);
+	
+	VERTEX.y += height_mix * height_scale * (1.0 - vertex_distance_clamped);
+	
+	float fraction_x = fract(round(UV.x * 1000.0) / 10.0);
+	float fraction_y = fract(round(UV.y * 1000.0) / 10.0);
+	if (fraction_x != 0.0) {
+		if (fract(UV.y) == 0.0) {
+			VERTEX.y = ((prev_height_x + next_height_x) * height_scale * (1.0 - vertex_distance_clamped)) / 2.0;
+		}
+	}
+	if (fraction_y != 0.0) {
+		if (fract(UV.x) == 0.0) {
+			VERTEX.y = ((prev_height_y + next_height_y) * height_scale * (1.0 - vertex_distance_clamped)) / 2.0;
+		}	
+	}
+	
 }
 
 // Called for every pixel the material is visible on.
-void fragment() {
+void fragment() 
+{
 //	Controls depth coloration
 	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV, 0.0).r;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_texture);
@@ -77,8 +130,10 @@ void fragment() {
 //	Main shader of the water.
 	vec2 time = (TIME * wave_direction) * time_scale;
 	vec2 time2 = (TIME * wave_direction2) * time_scale;
-	vec3 normal_blend = mix( texture(texture_normal, world_position.xz + time).rgb, texture(texture_normal2, world_position.xz + time2).rgb, 0.5 ); 
 	
+	vec3 normal_blend = mix( texture(texture_normal, world_position.xz / noise_scale + time).rgb, texture(texture_normal2, world_position.xz + time2).rgb, 0.5 ); 
+	
+	vec3 wave_normal_blend = mix(texture(wave_bump, world_position.xz / noise_scale + time ).xyz, texture( wave_bump, world_position.xz / noise_scale + time2).xyz, 0.3);   
 	
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
 	vec3 surface_color = mix(albedo.rgb, albedo2.rgb, fresnel);
@@ -90,7 +145,8 @@ void fragment() {
 	//ALBEDO = clamp(surface_color + depth_color_adj, vec3(0.0), vec3(1.0));
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
-	NORMAL_MAP = normal_blend;
+	//NORMAL_MAP = normal_blend;
+	NORMAL_MAP = mix(wave_normal_blend, normal_blend, 0.5);
 }
 
 //void light() {

@@ -2,7 +2,7 @@ extends Node3D
 @onready var water_plane: MeshInstance3D = $"../WaterPlane"
 @export var float_force := 5.00
 @export var water_drag := 0.05
-@export var water_angular_drag := 0.05
+@export var water_angular_drag := 0.25
 
 @onready var debrisGroup = get_children()
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
