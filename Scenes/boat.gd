@@ -1,11 +1,15 @@
 extends RigidBody3D
 
+signal set_movement_state(_movement_state: MovementState)
+
 @export var water_drag := 0.05
 @export var water_angular_drag := 0.50
 @export var float_force := 1.0
 @export var forward_const_force = 400
-@export var backward_const_force = 300
+@export var backward_const_force = 0.75 * forward_const_force
 @export var rotational_const_force = 30
+
+@export var movement_states : Dictionary
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var hori: Node3D = $Hori
@@ -21,6 +25,10 @@ var mouse_movement = Vector2()
 var moving_rotational_degrees = 0.5
 var stationary_rotational_degrees = 0.4
 var submerged := false
+
+
+func _ready():
+	set_movement_state.emit(movement_states["idle"])
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -118,7 +126,7 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_pressed( "Right" ):
 #		Will rotate towards the world direction, not the boat direction.
-#		TODO: See if can make torque apply locally to the boat, instead of globally?
+#		TODO: See if can make z torque apply locally to the boat, instead of globally? So that the direction doesn't change with relative world direction.
 		if rotation_degrees.y > 0:
 			apply_torque( Vector3( 0,-rotational_const_force, 75 ))
 		else:
