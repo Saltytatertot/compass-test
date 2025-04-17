@@ -127,14 +127,14 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed( "Right" ):
 #		Will rotate towards the world direction, not the boat direction.
 #		TODO: See if can make z torque apply locally to the boat, instead of globally? So that the direction doesn't change with relative world direction.
-		if rotation_degrees.y > 0:
-			apply_torque( Vector3( 0,-rotational_const_force, 75 ))
-		else:
-			apply_torque( Vector3( 0,-rotational_const_force, -75 ))
+		#if rotation_degrees.y > 0:
+		apply_torque( Vector3( 0,-rotational_const_force, 75 ))
+		#else:
+			#apply_torque( Vector3( 0,-rotational_const_force, -75 ))
 			
 		#add_constant_torque(Vector3( 0,-rotational_const_force, 75 ))
-		print(rotation_degrees.y)
-		print(rotation_degrees.z)
+		#print(rotation_degrees.y)
+		#print(rotation_degrees.z)
 		
 
 	if Input.is_action_pressed( "Left" ):
@@ -158,18 +158,27 @@ func _physics_process(_delta: float) -> void:
 				#apply_force(Vector3.UP*1*-$Floaty4.global_transform.origin, $Floaty4.global_transform.origin - global_transform.origin)	
 #
 # TODO: Make ship influenced by wind
-# TODO: Make the water infinitly traversable
+# DONE: Make the water infinitly traversable
 # TODO: Make ship move autonomously
 # TODO: Make ship traversible while in motion.
 # TODO: Make underwater camera effect
 # TODO: Make camera Stable to world rather than boat
-# TODO: Make ship Sails have different states, either progressive, or finite
+# TODO: Make ship Sails have different states, either progressive, or finite state
 # TODO: Make ship wheel activatable
 # TODO: Make ship climb-able via hull and rigging?
 # TODO: Make ship dockable
 # TODO: Add an anchor.
 # TODO: Adjust camera for 1st person
 # TODO: Add in storms
+# TODO: Rethink player character on boat. Collision between the boat and the player I've made is too computationally challenging.
+# NOTE: My thoughts for right now: Make a "Fake" player that is essentially a camera at a fixed height based on its position from the ship collision
+# and can't move out of bounds of the ship. Thus the ship is enclosed. Functionally, the player will behave the same as if they were the current player 
+# implementation. The current player implementation could be used for land.
+
+# NOTE: Another Idea, try the trimesh collision and not worry about the occasional performance loss?
+
+# TODO: Seperate Player and Ship as controllable entities. While preserving the position of each.
+
 # DONE: Add in waves via shader
 # DONE: Make things float via the shader
 #DONE Apply torque doesn't seem to be working, rotational_degrees will work for now. 

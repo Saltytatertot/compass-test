@@ -1,0 +1,27 @@
+Sailing Game Ideas:
+
+If I were to fake the player ship interaction:
+
+I would have the ship be interactable, on interaction, have a pirate model reveal themselves onto the boat, and the boat takes control and the player is unloaded from the scene. 
+The ship would only be controllable if the player interacted with it. Might be good to set a flag for this. 
+
+
+
+Overarching Picture:
+
+Sail to different islands, where sailing is the fun. Ship is controllable, and if not incontrol at the moment, will keep its heading, allowing the player to navigate the boat while it is sailing.
+
+
+Gameplay may involve repairs, delivering passengers to their destinations.
+
+
+Game should be no longer than 5 hours, with a goal for about 2 hours worth of gameplay. 
+
+Sailing will have emergent aspect to it, i.e. could be played indefinitely, but core loop will hold most of the attention.
+
+Sailing will take a while, and is the core of the game. 10 minute voyages? So that being in a place means something. 
+
+
+If going the repair route: Have a limited cargo load, and have like 3 resources to stock up on. They each share the load, and stocking up on all three evenly might not be enough to successfullly traverse to the next place.
+
+The resources would have to fit the trip. Like, more rope to A, more Sails to B, more Wood for C, and some combination of that. Could also have a tax man event, and try to bury a chest out a sea, and reclaim later. 

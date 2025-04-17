@@ -1,0 +1,5 @@
+Screen dimensions are: 648 x 1152. Would need to be done programmatically somehow to get center 
+on every screen configuration.
+
+Exact half is 324 x 576. To place on screen buttons for menus to look nice, take the size of the button, divide by two, and subtract that value
+from the position with x, y respectively. 

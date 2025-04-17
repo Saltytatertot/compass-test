@@ -16,7 +16,7 @@ const JUMP_VELOCITY = 4.5
 
 #var voidPosition: Vector3 = Vector3(0,-100,0)
 var void_position: int = -100
-var reset_position: Vector3 = Vector3.ONE
+var reset_position: Vector3 = Vector3.ONE * 10
 var weapon_to_spawn
 var weapon_to_drop
 

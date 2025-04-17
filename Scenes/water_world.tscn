@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://8v6sn4hv8fjp"]
+[gd_scene load_steps=16 format=3 uid="uid://8v6sn4hv8fjp"]
 
 [ext_resource type="PackedScene" uid="uid://cb1uxahbpsd1l" path="res://Scenes/Ship.tscn" id="1_uurnj"]
 [ext_resource type="Script" path="res://Scenes/box.gd" id="2_oq586"]
 [ext_resource type="PackedScene" uid="uid://imt13oet5uta" path="res://Scenes/water_plane.tscn" id="3_nb18y"]
 [ext_resource type="PackedScene" uid="uid://ukf5npc6vxk3" path="res://Scenes/Ocean.tscn" id="4_5p8ko"]
+[ext_resource type="PackedScene" uid="uid://2r6pffa81spa" path="res://Player/player.tscn" id="5_lkjnd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fpwic"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -54,7 +55,7 @@ mesh = SubResource("PlaneMesh_53kyr")
 surface_material_override/0 = SubResource("StandardMaterial3D_8kwgr")
 
 [node name="Ship" parent="." instance=ExtResource("1_uurnj")]
-transform = Transform3D(-0.999998, 0.000303081, -0.00171886, 0, 0.984808, 0.173648, 0.00174537, 0.173648, -0.984806, -0.00365305, 14.7686, 4.14199)
+transform = Transform3D(-0.999998, 0.000303081, -0.00171886, 0, 0.984808, 0.173648, 0.00174537, 0.173648, -0.984806, -0.00365305, 3.78161, 4.14199)
 
 [node name="DebrisGroup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
@@ -184,3 +185,12 @@ shape = SubResource("ConvexPolygonShape3D_kt0qr")
 
 [node name="WaterPlane" parent="." instance=ExtResource("3_nb18y")]
 visible = false
+
+[node name="Dock" type="CSGBox3D" parent="."]
+transform = Transform3D(3.02274, 0, 0, 0, 10.0062, 0, 0, 0, 3.7789, -10.8665, -0.959992, 2.73684)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="Player" parent="." instance=ExtResource("5_lkjnd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.650384, 5.47701, 4.31157)
