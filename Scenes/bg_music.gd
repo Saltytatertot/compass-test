@@ -1,6 +1,7 @@
 extends Node2D
 var MainMenu = load("res://Scenes/MainMenu.tscn")
 var OptionsMenu = load("res://Scenes/OptionsMenu.tscn")
+@onready var ocean: Node3D = $Ocean
 
 
 

@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bynygi8ym1hq"]
+[gd_scene load_steps=9 format=3 uid="uid://bynygi8ym1hq"]
 
 [ext_resource type="AudioStream" uid="uid://hus0p7kyvedm" path="res://Music/all we got (a song made of sea shanty samples).mp3" id="1_ix0fh"]
 [ext_resource type="Script" path="res://Scenes/bg_music.gd" id="1_yrawd"]
+[ext_resource type="PackedScene" uid="uid://ukf5npc6vxk3" path="res://Scenes/Ocean.tscn" id="2_1s5p3"]
+[ext_resource type="PackedScene" uid="uid://imt13oet5uta" path="res://Scenes/water_plane.tscn" id="3_bqpt7"]
+[ext_resource type="PackedScene" uid="uid://dem6bcprlkewl" path="res://Scenes/ShipAgnostic.tscn" id="5_7qwv3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wadv6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_kp0hc"]
+sky_material = SubResource("ProceduralSkyMaterial_wadv6")
+
+[sub_resource type="Environment" id="Environment_47ufm"]
+background_mode = 2
+sky = SubResource("Sky_kp0hc")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
 
 [node name="BG_Music" type="Node2D"]
 script = ExtResource("1_yrawd")
@@ -10,5 +27,25 @@ script = ExtResource("1_yrawd")
 stream = ExtResource("1_ix0fh")
 autoplay = true
 playback_type = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_47ufm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.572146, -0.565593, 0.593931, 0, 0.724172, 0.68962, -0.820152, 0.394563, -0.414332, 0, 0, 0)
+shadow_enabled = true
+sky_mode = 2
+
+[node name="Ocean" parent="." instance=ExtResource("2_1s5p3")]
+
+[node name="WaterPlane" parent="." instance=ExtResource("3_bqpt7")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.377581, 0.18201, 0.907913, 0.00329254, 0.98075, -0.195242, -0.925971, -0.0707302, -0.370911, 5.82002, 3.24045, -10.6908)
+fov = 58.0
+
+[node name="Ship" parent="." instance=ExtResource("5_7qwv3")]
+transform = Transform3D(-0.983631, 0, 0.180193, 0, 1, 0, -0.180193, 0, -0.983631, -0.694994, 3.72053, -2.29426)
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

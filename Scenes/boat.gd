@@ -14,7 +14,8 @@ signal set_movement_state(_movement_state: MovementState)
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var hori: Node3D = $Hori
 @onready var verti: Node3D = $Hori/Verti
-@onready var water_plane = get_node('/root/Water_World/WaterPlane')
+#@onready var water_plane = get_node('/root/Water_World/WaterPlane')
+@onready var water_plane: MeshInstance3D = $"../WaterPlane"
 
 @onready var floaty_contaier = $FloatyContaier.get_children()
 @onready var camera_3d: Camera3D = $Hori/Verti/Camera3D
@@ -26,9 +27,9 @@ var moving_rotational_degrees = 0.5
 var stationary_rotational_degrees = 0.4
 var submerged := false
 
-
-func _ready():
-	set_movement_state.emit(movement_states["idle"])
+#
+#func _ready():
+	#set_movement_state.emit(movement_states["idle"])
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
